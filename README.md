@@ -1,2 +1,79 @@
 # portfolio
 My Portfolio
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles/styles.css">
+  <title>My Portfolio</title>
+</head>
+<body>
+
+<header>
+  <img src="images/selfie.jpg" alt="My photo">
+  <h1>Zee's Portfolio</h1>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="resume.html">Resume</a></li>
+      <li><a href="portfolio/animate.html">Animate</a></li>
+      <li><a href="portfolio/photoshop.html">Photoshop</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <section id="welcome">
+    <h2>Welcome</h2>
+    <img src="images/banner.jpg" alt="Portfolio banner" style="width:100%; border-radius:4px; margin-bottom:15px;">
+    <p><strong>Hello! I'm Zee.</strong></p>
+    <p>
+      I am a digital artist and marketing professional.
+      This portfolio showcases my work in animation and photography.
+    </p>
+  </section>
+
+  <section id="Portfolio">
+    <h2>Featured Work</h2>
+    <div class="showcase-grid">
+
+      <article>
+        <h3>Adobe Animate</h3>
+        <img src="images/animate.jpg" alt="Animate Portfolio">
+        <p>Animations created in Adobe Animate.</p>
+        <p><a href="portfolio/animate.html">View Animate work...</a></p>
+      </article>
+
+      <article>
+        <h3>Photoshop</h3>
+        <img src="images/photoshop.jpg" alt="Photoshop Portfolio">
+        <p>Photoshop Projects</p>
+        <p><a href="portfolio/photoshop.html">View Photoshop work...</a></p>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      I am currently looking for work and am passionate about visual
+      storytelling and bringing ideas to life through animation and design.
+    </p>
+    <p>
+      Explore my portfolio pages or
+      <a href="resume.html">view my full resume</a>.
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  <p>&copy; 2026 Shannon Ziemba. All rights reserved.</p>
+  <p><a href="mailto:sziemba@gmail.com">sziemba@gmail.com</a></p>
+</footer>
+
+</body>
+</html>
