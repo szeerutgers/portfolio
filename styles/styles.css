@@ -153,3 +153,10 @@ footer a {
 footer a:hover {
   text-decoration: underline;
 }
+
+dt {
+    font-weight: bold;
+}
+dt {
+  margin-top: 20px; /* Adds space above each term */
+}
