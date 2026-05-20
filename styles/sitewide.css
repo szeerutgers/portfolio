@@ -1,20 +1,50 @@
 /* ── Stylesheet ── */
+
+/* ── CSS Variables for Theme System ── */
+:root {
+  --bg:         #f9f9f9;
+  --fg:         #333;
+  --header-bg:  #222;
+  --header-fg:  #fff;
+  --section-bg: #fff;
+  --section-bd: #343534;
+  --card-bg:    #fafafa;
+  --footer-bg:  #343534;
+  --fs-base:    15px;
+}
+[data-theme="dark"] {
+  --bg:         #1a1a1a;
+  --fg:         #e8e8e8;
+  --header-bg:  #111;
+  --header-fg:  #e8e8e8;
+  --section-bg: #242424;
+  --section-bd: #444;
+  --card-bg:    #2c2c2c;
+  --footer-bg:  #111;
+}
+[data-font-size="small"]  { --fs-base: 13px; }
+[data-font-size="medium"] { --fs-base: 15px; }
+[data-font-size="large"]  { --fs-base: 18px; }
+
 body {
   font-family: Arial, sans-serif;
+  font-size: var(--fs-base);
   margin: 0;
   padding: 15px 30px;
-  background-color: #f9f9f9;
-  color: #333;
+  background-color: var(--bg);
+  color: var(--fg);
+  transition: background-color .25s, color .25s;
 }
 
 /* ── Header ── */
 header {
-  background-color: #222;
-  color: white;
+  background-color: var(--header-bg);
+  color: var(--header-fg);
   padding: 15px 30px;
   display: flex;
   align-items: center;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
 header img {
@@ -35,19 +65,123 @@ nav ul {
   margin: 0;
   padding: 0;
   display: flex;
-  gap: 20px;
+  gap: 5px;
   margin-left: auto;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 nav ul li a {
-  color: white;
+  color: var(--header-fg);
   text-decoration: none;
   font-size: 0.95rem;
+  padding: 6px 10px;
+  display: block;
 }
 
 nav ul li a:hover {
   text-decoration: underline;
 }
+
+/* ── Dropdown Nav ── */
+nav ul li.has-dropdown {
+  position: relative;
+}
+
+.nav-dropdown-btn {
+  background: none;
+  border: none;
+  color: var(--header-fg);
+  font-family: Arial, sans-serif;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+.nav-dropdown-btn:hover { text-decoration: underline; }
+
+.nav-arrow {
+  font-size: 0.6rem;
+  transition: transform .2s;
+  opacity: .75;
+}
+.has-dropdown.open > .nav-dropdown-btn .nav-arrow {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 200px;
+  background: var(--section-bg);
+  border: 1px solid var(--section-bd);
+  border-radius: 4px;
+  padding: 4px 0;
+  list-style: none;
+  margin: 0;
+  z-index: 200;
+  box-shadow: 0 4px 16px rgba(0,0,0,.18);
+}
+.has-dropdown.open > .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu li a {
+  color: var(--fg);
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  display: block;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.dropdown-menu li a:hover {
+  background: #343534;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Theme menu special styles */
+.theme-menu {
+  min-width: 230px;
+  right: 0;
+  left: auto;
+  padding: 8px 0;
+}
+.theme-group-label {
+  font-size: 0.72rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: #888;
+  padding: 6px 14px 3px;
+}
+.theme-options-row {
+  display: flex;
+  gap: 6px;
+  padding: 4px 14px;
+}
+.theme-divider {
+  border-top: 1px solid var(--section-bd);
+  margin: 6px 10px;
+}
+.theme-opt {
+  padding: 4px 12px;
+  background: var(--card-bg);
+  border: 1px solid var(--section-bd);
+  border-radius: 20px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  color: var(--fg);
+  font-family: Arial, sans-serif;
+  transition: background .15s, color .15s;
+}
+.theme-opt:hover { background: #343534; color: #fff; }
+.theme-opt.active { background: #343534; color: #fff; border-color: #343534; }
 
 /* ── Main Content ── */
 main {
@@ -58,18 +192,67 @@ main {
 
 /* ── Sections ── */
 section {
-  background-color: white;
-  border: 1px solid #343534;
+  background-color: var(--section-bg);
+  border: 1px solid var(--section-bd);
   border-radius: 6px;
   padding: 25px;
   margin-bottom: 25px;
+  transition: background-color .25s;
 }
 
 section h2 {
   margin-top: 0;
-  color: #222;
-  border-bottom: 2px solid #343534;
+  color: var(--fg);
+  border-bottom: 2px solid var(--section-bd);
   padding-bottom: 8px;
+}
+
+/* ── Collapsible Resume Sections ── */
+.collapsible-section {
+  padding: 0;
+  overflow: hidden;
+}
+
+.section-toggle {
+  width: 100%;
+  background: none;
+  border: none;
+  font-family: Arial, sans-serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--fg);
+  cursor: pointer;
+  padding: 20px 25px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid transparent;
+  transition: background .15s;
+}
+.collapsible-section.open .section-toggle {
+  border-bottom-color: var(--section-bd);
+}
+.section-toggle:hover { background: rgba(52,53,52,.06); }
+
+.section-arrow {
+  font-size: 0.7rem;
+  opacity: .6;
+  transition: transform .25s;
+}
+.collapsible-section.open .section-arrow {
+  transform: rotate(180deg);
+}
+
+.section-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .35s ease, padding .25s;
+  padding: 0 25px;
+}
+.collapsible-section.open .section-body {
+  max-height: 1000px;
+  padding: 20px 25px 25px;
 }
 
 /* ── Portfolio Grid ── */
@@ -81,10 +264,10 @@ section h2 {
 
 .portfolio-grid article {
   flex: 1 1 250px;
-  border: 1px solid #343534;
+  border: 1px solid var(--section-bd);
   border-radius: 6px;
   padding: 15px;
-  background-color: #fafafa;
+  background-color: var(--card-bg);
 }
 
 .portfolio-grid article h3 {
@@ -111,11 +294,12 @@ table {
 table th, table td {
   text-align: left;
   padding: 15px 30px;
-  border-bottom: 1px solid #343534;
+  border-bottom: 1px solid var(--section-bd);
+  color: var(--fg);
 }
 
 table th {
-  background-color: #f0f0f0;
+  background-color: var(--card-bg);
   font-weight: bold;
 }
 
@@ -138,7 +322,7 @@ table th {
 
 /* ── Footer ── */
 footer {
-  background-color: #343534;
+  background-color: var(--footer-bg);
   color: white;
   text-align: center;
   padding: 15px 30px;
@@ -146,7 +330,7 @@ footer {
 }
 
 footer a {
-  color: #343534;
+  color: #ccc;
   text-decoration: none;
 }
 
@@ -155,11 +339,7 @@ footer a:hover {
 }
 
 dt {
-    font-weight: bold;
-}
-dt {
-  margin-top: 20px; /* Adds space above each term */
+  font-weight: bold;
+  margin-top: 20px;
 }
 
-
-}

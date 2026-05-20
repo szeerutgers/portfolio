@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="styles/styles.css">
+  <link rel="stylesheet" href="styles/sitewide.css">
   <title>Resume</title>
 </head>
 <body>
@@ -15,18 +15,65 @@
     <ul>
       <li><a href="index.html">Home</a></li>
       <li><a href="resume.html">Resume</a></li>
-      <li><a href="portfolio/animate.html">Animate</a></li>
-      <li><a href="portfolio/photoshop.html">Photoshop</a></li>
-      <li><a href="portfolio/colortheoryoverview.html">Color Theory Overview</a></li>
-      <li><a href="portfolio/typographyoverview.html">Typography Overview</a></li>
+
+      <!-- Showcase dropdown -->
+      <li class="has-dropdown">
+        <button class="nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
+          Showcase <span class="nav-arrow">&#9660;</span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a href="portfolio/animate.html">Adobe Animate</a></li>
+          <li><a href="portfolio/photoshop.html">Photoshop</a></li>
+          <li><a href="portfolio/illustrator.html">Illustrator</a></li>
+          <li><a href="portfolio/webdesign.html">Web Design</a></li>
+        </ul>
+      </li>
+
+      <!-- Theory dropdown -->
+      <li class="has-dropdown">
+        <button class="nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
+          Theory <span class="nav-arrow">&#9660;</span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a href="portfolio/colortheoryoverview.html">Color Theory Overview</a></li>
+          <li><a href="portfolio/colorharmony.html">Color Harmony</a></li>
+          <li><a href="portfolio/typographyoverview.html">Typography Overview</a></li>
+          <li><a href="portfolio/typographypairing.html">Font Pairing</a></li>
+        </ul>
+      </li>
+
+      <!-- Theme dropdown -->
+      <li class="has-dropdown" id="theme-nav-item">
+        <button class="nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
+          Theme <span class="nav-arrow">&#9660;</span>
+        </button>
+        <ul class="dropdown-menu theme-menu">
+          <li class="theme-group-label">Mode</li>
+          <li class="theme-options-row">
+            <button id="btn-light" class="theme-opt active" onclick="setMode('light')">Light</button>
+            <button id="btn-dark"  class="theme-opt"        onclick="setMode('dark')">Dark</button>
+          </li>
+          <li class="theme-divider"></li>
+          <li class="theme-group-label">Font Size</li>
+          <li class="theme-options-row">
+            <button id="btn-small"  class="theme-opt"        onclick="setFont('small')">Small</button>
+            <button id="btn-medium" class="theme-opt active" onclick="setFont('medium')">Medium</button>
+            <button id="btn-large"  class="theme-opt"        onclick="setFont('large')">Large</button>
+          </li>
+        </ul>
+      </li>
+
     </ul>
   </nav>
 </header>
 
 <main>
 
-  <section id="education">
-    <h2>Education</h2>
+  <section id="education" class="collapsible-section open">
+    <button class="section-toggle" onclick="toggleSection('education')" aria-expanded="true">
+      Education <span class="section-arrow">&#9660;</span>
+    </button>
+    <div class="section-body">
     <table>
       <tr>
         <th>Rutgers University, New Brunswick, NJ</th>
@@ -34,10 +81,14 @@
         <th>1996-2000</th>
       </tr>
     </table>
+    </div>
   </section>
 
-  <section id="experience">
-    <h2>Experience</h2>
+  <section id="experience" class="collapsible-section open">
+    <button class="section-toggle" onclick="toggleSection('experience')" aria-expanded="true">
+      Experience <span class="section-arrow">&#9660;</span>
+    </button>
+    <div class="section-body">
     <table>
       <tr>
         <th>Head Soils and Lab Technician</th>
@@ -65,24 +116,29 @@
         <th>2022-2025</th>
       </tr>
       <tr>
-        <td>Marketing & Design</td>
+        <td>Marketing &amp; Design</td>
         <td>For Hire</td>
         <td>2025 – Present</td>
       </tr>
     </table>
+    </div>
   </section>
 
-  <section id="skills">
-    <h2>Skills</h2>
+  <section id="skills" class="collapsible-section open">
+    <button class="section-toggle" onclick="toggleSection('skills')" aria-expanded="true">
+      Skills <span class="section-arrow">&#9660;</span>
+    </button>
+    <div class="section-body">
     <ul class="skills-list">
       <li>Adobe Animate</li>
       <li>Adobe Photoshop</li>
       <li>Adobe Illustrator</li>
-      <li>Martketing Strategy</li>
+      <li>Marketing Strategy</li>
       <li>Brand Identity</li>
       <li>Powerpoint Presentations</li>
       <li>HTML/CSS</li>
     </ul>
+    </div>
   </section>
 
 </main>
@@ -92,5 +148,6 @@
   <p><a href="mailto:sziemba@gmail.com">sziemba@gmail.com</a></p>
 </footer>
 
+<script src="../scripts/theme.js"></script>
 </body>
 </html>
