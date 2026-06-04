@@ -1,116 +1,622 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="../styles/sitewide.css">
-    <link rel="stylesheet" href="../styles/showcase.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Adobe Animate — Zee's Portfolio</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap');
 
-  <title>Adobe Animate Portfolio</title>
+:root {
+  --accent: #089b74;
+  --accent-hover: #e3731d;
+  --bg: #F5F3EE;
+  --surface: #FFFFFF;
+  --text-primary: #111111;
+  --text-muted: #666666;
+  --border: #DEDBD5;
+  --nav-height: 64px;
+}
+
+/* BASE */
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* NAVBAR */
+.navbar {
+  background-color: var(--surface) !important;
+  border-bottom: 1px solid var(--border);
+  height: var(--nav-height);
+  padding: 0 1.5rem;
+}
+
+.navbar-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary) !important;
+  letter-spacing: -0.02em;
+}
+
+.navbar-brand span {
+  color: var(--accent);
+}
+
+.nav-link {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary) !important;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.5rem 0.85rem !important;
+  transition: color 0.2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--accent) !important;
+}
+
+.dropdown-menu {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  padding: 0.5rem 0;
+  background: var(--surface);
+}
+
+.dropdown-item {
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  padding: 0.5rem 1.25rem;
+  transition: background 0.15s;
+}
+
+.dropdown-item:hover {
+  background-color: var(--bg);
+  color: var(--accent);
+}
+
+.navbar-toggler {
+  border: none;
+  padding: 0;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
+/* HERO */
+.hero {
+  padding: 5rem 0 4rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1.1;
+  margin-bottom: 1.25rem;
+}
+
+.hero p {
+  font-size: 1.125rem;
+  color: var(--text-muted);
+  max-width: 480px;
+}
+
+.hero-img {
+  width: 260px;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid var(--surface);
+  outline: 1px solid var(--border);
+  filter: grayscale(20%);
+}
+
+/* SECTION */
+.section {
+  padding: 4rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* CARDS */
+.work-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.work-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.09);
+  color: inherit;
+}
+
+.work-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(15%);
+  transition: filter 0.3s;
+}
+
+.work-card:hover img {
+  filter: grayscale(0%);
+}
+
+.work-card-body {
+  padding: 1.25rem 1.5rem;
+}
+
+.work-card-body h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.35rem;
+}
+
+.work-card-body p {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.card-link {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.card-link::after {
+  content: ' →';
+}
+
+/* BUTTONS */
+.btn-accent {
+  background-color: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 2px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.65rem 1.5rem;
+  transition: background 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-accent:hover {
+  background-color: var(--accent-hover);
+  color: #fff;
+}
+
+.btn-outline-editorial {
+  background: transparent;
+  border: 1px solid var(--text-primary);
+  color: var(--text-primary);
+  border-radius: 2px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.65rem 1.5rem;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-outline-editorial:hover {
+  background: var(--text-primary);
+  color: var(--bg);
+}
+
+/* RESUME PAGE */
+.resume-header {
+  padding: 4rem 0 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.resume-name {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 0.25rem;
+}
+
+.resume-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.resume-section-title {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--accent);
+  display: inline-block;
+}
+
+.resume-entry {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.25rem 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.resume-entry:last-child {
+  border-bottom: none;
+}
+
+.resume-role {
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.resume-org {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.resume-date {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  align-self: start;
+}
+
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skill-badge {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.35rem 0.85rem;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+}
+
+/* COLOR THEMES TABLE */
+.color-themes-intro {
+  padding: 4rem 0 2rem;
+}
+
+.theme-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.theme-table thead th {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid var(--border);
+  background: var(--surface);
+}
+
+.theme-table tbody tr {
+  transition: background 0.15s;
+}
+
+.theme-table tbody tr:hover {
+  background-color: rgba(193,68,14,0.04);
+}
+
+.theme-table td {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.color-swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 1px solid rgba(0,0,0,0.1);
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+
+.theme-badge {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.65rem;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+/* SHOWCASE PAGE */
+.showcase-hero {
+  padding: 4rem 0 3rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.showcase-hero h1 {
+  font-size: clamp(2rem, 4vw, 3.25rem);
+}
+
+.project-item {
+  padding: 3rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.project-item:last-child {
+  border-bottom: none;
+}
+
+.project-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 4rem;
+  color: var(--border);
+  line-height: 1;
+  font-weight: 700;
+  user-select: none;
+}
+
+.project-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.project-title {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.project-desc {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 1.25rem;
+}
+
+.media-frame {
+  background: #111;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.media-frame img,
+.media-frame video {
+  width: 100%;
+  display: block;
+}
+
+/* FOOTER */
+footer {
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--border);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* UTILITIES */
+.accent { color: var(--accent); }
+.text-editorial { font-family: 'Playfair Display', serif; }
+
+@media (max-width: 768px) {
+  .hero { padding: 3rem 0; }
+  .hero-img { width: 180px; height: 180px; }
+  .resume-entry { grid-template-columns: 1fr; }
+  .resume-date { text-align: left; }
+}
+
+</style>
 </head>
-<body class="page-animate">
+<body>
 
-<header>
-  <img src="../images/selfie.jpg" alt="My photo">
-  <h1>Zee's Portfolio</h1>
-  <nav>
-    <ul>
-      <li><a href="../index.html">Home</a></li>
-      <li><a href="../resume.html">Resume</a></li>
-    
-    <li class="has-dropdown">
-        <button class="nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
-          Showcase <span class="nav-arrow">&#9660;</span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a href="animate.html">Adobe Animate</a></li>
-          <li><a href="photoshop.html">Photoshop</a></li>
-        </ul>
-      </li>
-
-      <li class="has-dropdown">
-        <button class="nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
-          Theory <span class="nav-arrow">&#9660;</span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a href="colortheoryoverview.html">Color Theory Overview</a></li>
-          <li><a href="colorthemes.html">Color Themes</a></li>
-          <li><a href="typographyoverview.html">Typography Overview</a></li>
-          <li><a href="typographyarticle.html">Typography Article</a></li>
-        </ul>
-      </li>
-
-      <li class="has-dropdown" id="theme-nav-item">
-        <button class="nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
-          Theme <span class="nav-arrow">&#9660;</span>
-        </button>
-        <ul class="dropdown-menu theme-menu">
-          <li class="theme-group-label">Mode</li>
-          <li class="theme-options-row">
-            <button id="btn-light" class="theme-opt active" onclick="setMode('light')">Light</button>
-            <button id="btn-dark"  class="theme-opt"        onclick="setMode('dark')">Dark</button>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">Zee<span>.</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+          <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="../resume.html">Resume</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" data-bs-toggle="dropdown">Showcase</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item active" href="animate.html">Adobe Animate</a></li>
+              <li><a class="dropdown-item" href="photoshop.html">Photoshop</a></li>
+            </ul>
           </li>
-          <li class="theme-divider"></li>
-          <li class="theme-group-label">Font Size</li>
-          <li class="theme-options-row">
-            <button id="btn-small"  class="theme-opt"        onclick="setFont('small')">Small</button>
-            <button id="btn-medium" class="theme-opt active" onclick="setFont('medium')">Medium</button>
-            <button id="btn-large"  class="theme-opt"        onclick="setFont('large')">Large</button>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Theory</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="colortheoryoverview.html">Color Theory Overview</a></li>
+              <li><a class="dropdown-item" href="colorthemes.html">Color Themes</a></li>
+              <li><a class="dropdown-item" href="typographyoverview.html">Typography Overview</a></li>
+              <li><a class="dropdown-item" href="typographyarticle.html">Typography Article</a></li>
+            </ul>
           </li>
         </ul>
-      </li>
-
-    </ul>
-  </nav>
-</header>
-
-<main>
-
-  <section>
-    <h2>Adobe Animate</h2>
-    <p>Below are samples of my animation work created in Adobe Animate.</p>
-
-    <div class="showcase-grid">
-
-      <article>
-        <h3>Ziggles & Zee</h3>
-        <img src="../images/ZigglesZee_CharacterAnimation2.gif" alt="Ziggles & Zee Animation">
-        <p>
-          Ziggles & Zee is a short animation about my cat and me feeding the birds nuts.
-        </p>
-      </article>
-
-      <article>
-        <h3>Everyone Loves Nuts</h3>
-        <img src="../images/Peanuts_ProductAdvertisement.gif" alt="Everyone Loves Nuts Ad Animation">
-        <p>
-          Everyone Loves Nuts is a promotional animation for a nut company.
-        </p>
-      </article>
-
-      <article>
-        <h3>Juni's Little BIG Adventure</h3>
-        <video width="640" height="360" controls>
-        <source src="../images/JunisLittleBigAdventure.mp4" type="video/mp4">
-        <audio id="JuniAudio">
-        <source src="../images/JunisLittleBigAdventure.mp3" type="audio/mp3">
-        </audio>
-        </video>
-        <p>
-          Juni's Little BIG Adventure is a mockup introduction for a video game based in my home town.
-        </p>
-      </article>
-
+      </div>
     </div>
-  </section>
+  </nav>
 
-</main>
+  <!-- PAGE HERO -->
+  <header class="showcase-hero">
+    <div class="container">
+      <p class="hero-eyebrow">Showcase / Animation</p>
+      <h1>Adobe Animate</h1>
+      <p class="text-muted mt-2" style="max-width: 520px;">Character animations, promotional ads, and interactive stories — all hand-crafted in Adobe Animate.</p>
+    </div>
+  </header>
 
-<footer>
-  <p>&copy; 2026 Shannon Ziemba. All rights reserved.</p>
-  <p><a href="mailto:sziemba@gmail.com">sziemba@gmail.com</a></p>
-</footer>
+  <!-- PROJECT 01 -->
+  <article class="project-item">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <div class="media-frame">
+            <img src="../images/ZigglesZee_CharacterAnimation2.gif" alt="Ziggles & Zee animation" />
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <span class="project-number">01</span>
+          <p class="project-label">Character Animation</p>
+          <h2 class="project-title">Ziggles &amp; Zee</h2>
+          <p class="project-desc">A short character animation about my cat Ziggles and me feeding the birds nuts. Built with frame-by-frame animation in Adobe Animate, this piece explores natural movement and playful personality.</p>
+          <div class="d-flex flex-wrap gap-2">
+            <span class="skill-badge">Character Animation</span>
+            <span class="skill-badge">Adobe Animate</span>
+            <span class="skill-badge">GIF Export</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
 
-<script src="../scripts/theme.js"></script>
+  <!-- PROJECT 02 -->
+  <article class="project-item">
+    <div class="container">
+      <div class="row align-items-center g-5 flex-lg-row-reverse">
+        <div class="col-lg-6">
+          <div class="media-frame">
+            <img src="../images/Peanuts_ProductAdvertisement.gif" alt="Everyone Loves Nuts animation" />
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <span class="project-number">02</span>
+          <p class="project-label">Promotional Animation</p>
+          <h2 class="project-title">Everyone Loves Nuts</h2>
+          <p class="project-desc">A promotional animation spot for a nut brand, designed to communicate energy and brand personality through motion. Demonstrates storytelling within a tight runtime.</p>
+          <div class="d-flex flex-wrap gap-2">
+            <span class="skill-badge">Ad Animation</span>
+            <span class="skill-badge">Brand Motion</span>
+            <span class="skill-badge">Adobe Animate</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- PROJECT 03 -->
+  <article class="project-item">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <div class="media-frame">
+            <video controls poster="">
+              <source src="../images/JunisLittleBigAdventure.mp4" type="video/mp4" />
+              Your browser does not support HTML5 video.
+            </video>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <span class="project-number">03</span>
+          <p class="project-label">Game Intro / Concept</p>
+          <h2 class="project-title">Juni's Little BIG Adventure</h2>
+          <p class="project-desc">A mockup introduction for a video game set in my hometown. Combines original animation with a custom audio track to create an immersive, cinematic opening sequence.</p>
+          <div class="d-flex flex-wrap gap-2">
+            <span class="skill-badge">Video Game Concept</span>
+            <span class="skill-badge">Motion + Audio</span>
+            <span class="skill-badge">Adobe Animate</span>
+          </div>
+          <div class="mt-3">
+            <a href="../images/JunisLittleBigAdventure.mp3" class="card-link" download>Download audio track</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+      <span>&copy; 2026 Shannon Ziemba. All rights reserved.</span>
+      <a href="mailto:sziemba@gmail.com">sziemba@gmail.com</a>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
