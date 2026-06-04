@@ -1,145 +1,296 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="../styles/sitewide.css">
-  <title>Photoshop Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Typography Overview — Zee's Portfolio</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap');
+
+:root {
+  --accent: #089b74;
+  --accent-hover: #e3731d;
+  --bg: #F5F3EE;
+  --surface: #FFFFFF;
+  --text-primary: #111111;
+  --text-muted: #666666;
+  --border: #DEDBD5;
+  --nav-height: 64px;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.navbar {
+  background-color: var(--surface) !important;
+  border-bottom: 1px solid var(--border);
+  height: var(--nav-height);
+  padding: 0 1.5rem;
+}
+
+.navbar-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary) !important;
+  letter-spacing: -0.02em;
+}
+
+.navbar-brand span { color: var(--accent); }
+
+.nav-link {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary) !important;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.5rem 0.85rem !important;
+  transition: color 0.2s;
+}
+
+.nav-link:hover, .nav-link.active { color: var(--accent) !important; }
+
+.dropdown-menu {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  padding: 0.5rem 0;
+  background: var(--surface);
+}
+
+.dropdown-item {
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  padding: 0.5rem 1.25rem;
+  transition: background 0.15s;
+}
+
+.dropdown-item:hover { background-color: var(--bg); color: var(--accent); }
+.navbar-toggler { border: none; padding: 0; }
+.navbar-toggler:focus { box-shadow: none; }
+
+.hero-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.page-intro {
+  padding: 4rem 0 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.section {
+  padding: 4rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+dl.terms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem 2rem;
+}
+
+dl.terms-grid dt {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.15rem;
+}
+
+dl.terms-grid dd {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin: 0 0 0.75rem 0;
+}
+
+.card-callout {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  padding: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: box-shadow 0.2s;
+}
+
+.card-callout:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+  color: inherit;
+}
+
+.card-callout .card-link {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.card-callout .card-link::after { content: ' →'; }
+
+footer {
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--border);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+footer a { color: var(--accent); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+
+@media (max-width: 768px) {
+  dl.terms-grid { grid-template-columns: 1fr; }
+}
+  </style>
 </head>
 <body>
 
-<header>
-  <img src="../images/selfie.jpg" alt="My photo">
-  <h1>Zee's Portfolio</h1>
-  <nav>
-    <ul>
-      <li><a href="../index.html">Home</a></li>
-      <li><a href="../resume.html">Resume</a></li>
-    
-    <li class="has-dropdown">
-        <button class="nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
-          Showcase <span class="nav-arrow">&#9660;</span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a href="animate.html">Adobe Animate</a></li>
-          <li><a href="photoshop.html">Photoshop</a></li>
-        </ul>
-      </li>
-
-      <li class="has-dropdown">
-        <button class="nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
-          Theory <span class="nav-arrow">&#9660;</span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a href="colortheoryoverview.html">Color Theory Overview</a></li>
-          <li><a href="selectedworks/colorthemes.html">Color Themes</a></li>
-          <li><a href="selectedworks/typographyoverview.html">Typography Overview</a></li>
-          <li><a href="selectedworks/typographyarticle.html">Typography Article</a></li>
-        </ul>
-      </li>
-
-      <li class="has-dropdown" id="theme-nav-item">
-        <button class="nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
-          Theme <span class="nav-arrow">&#9660;</span>
-        </button>
-        <ul class="dropdown-menu theme-menu">
-          <li class="theme-group-label">Mode</li>
-          <li class="theme-options-row">
-            <button id="btn-light" class="theme-opt active" onclick="setMode('light')">Light</button>
-            <button id="btn-dark"  class="theme-opt"        onclick="setMode('dark')">Dark</button>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">Zee<span>.</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+          <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="../resume.html">Resume</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Showcase</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="animate.html">Adobe Animate</a></li>
+              <li><a class="dropdown-item" href="photoshop.html">Photoshop</a></li>
+            </ul>
           </li>
-          <li class="theme-divider"></li>
-          <li class="theme-group-label">Font Size</li>
-          <li class="theme-options-row">
-            <button id="btn-small"  class="theme-opt"        onclick="setFont('small')">Small</button>
-            <button id="btn-medium" class="theme-opt active" onclick="setFont('medium')">Medium</button>
-            <button id="btn-large"  class="theme-opt"        onclick="setFont('large')">Large</button>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" data-bs-toggle="dropdown">Theory</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="colortheoryoverview.html">Color Theory Overview</a></li>
+              <li><a class="dropdown-item" href="colorthemes.html">Color Themes</a></li>
+              <li><a class="dropdown-item active" href="typographyoverview.html">Typography Overview</a></li>
+              <li><a class="dropdown-item" href="typographyarticle.html">Typography Article</a></li>
+            </ul>
           </li>
         </ul>
-      </li>
-
-    </ul>
+      </div>
+    </div>
   </nav>
-</header>
 
-<main>
-<section>
-    <h1>Typography</h1>
-    <p>The Art of Arranging Type</p>
-    <h2>What is Typography?</h2>
-    <p>
-        Typography is the art and technique of arranging text to make written language readable,
-        clear, and visually appealing. It involves selecting typefaces, adjusting spacing,
-        and organizing content to enhance communication.
-    </p>
-    <p>
-        Good typography helps guide the reader’s eye, creates structure, and improves the
-        overall design experience.
-    </p>
-</section>
+  <!-- PAGE HEADER -->
+  <header class="page-intro">
+    <div class="container">
+      <p class="hero-eyebrow">Theory / Typography</p>
+      <h1 class="mb-3">Typography Overview</h1>
+      <p class="text-muted" style="max-width: 540px;">The art and technique of arranging type for clarity, readability, and visual appeal.</p>
+    </div>
+  </header>
 
-<section>
-    <h2>Key Typography Terms</h2>
-    <dl>
-        <dt>Typeface</dt>
-        <dd>A family of fonts that share a common design.</dd>
+  <!-- WHAT IS TYPOGRAPHY -->
+  <section class="section">
+    <div class="container">
+      <p class="section-label">Introduction</p>
+      <div class="row">
+        <div class="col-lg-7">
+          <h2 class="mb-3">What is Typography?</h2>
+          <p>Typography is the art and technique of arranging text to make written language readable, clear, and visually appealing. It involves selecting typefaces, adjusting spacing, and organizing content to enhance communication.</p>
+          <p>Good typography helps guide the reader's eye, creates structure, and improves the overall design experience.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <dt>Font</dt>
-        <dd>A specific style and size within a typeface.</dd>
+  <!-- KEY TERMS -->
+  <section class="section">
+    <div class="container">
+      <p class="section-label">Key Terms</p>
+      <dl class="terms-grid">
+        <div><dt>Typeface</dt><dd>A family of fonts that share a common design.</dd></div>
+        <div><dt>Font</dt><dd>A specific style and size within a typeface.</dd></div>
+        <div><dt>Serif</dt><dd>Small decorative strokes at the ends of letters.</dd></div>
+        <div><dt>Sans-serif</dt><dd>Fonts without decorative strokes.</dd></div>
+        <div><dt>Kerning</dt><dd>The spacing between individual letters.</dd></div>
+        <div><dt>Leading</dt><dd>The vertical space between lines of text.</dd></div>
+        <div><dt>Tracking</dt><dd>The overall spacing between characters.</dd></div>
+        <div><dt>Hierarchy</dt><dd>The arrangement of text to show importance.</dd></div>
+        <div><dt>Alignment</dt><dd>The positioning of text on a page.</dd></div>
+        <div><dt>Baseline</dt><dd>The invisible line that text sits on.</dd></div>
+        <div><dt>X-height</dt><dd>The height of lowercase letters.</dd></div>
+        <div><dt>Ascender</dt><dd>Part of a letter that rises above the x-height.</dd></div>
+        <div><dt>Descender</dt><dd>Part of a letter that falls below the baseline.</dd></div>
+      </dl>
+    </div>
+  </section>
 
-        <dt>Serif</dt>
-        <dd>Small decorative strokes at the ends of letters.</dd>
+  <!-- RELATED PAGES -->
+  <section class="section">
+    <div class="container">
+      <p class="section-label">Explore More</p>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <a class="card-callout" href="fonttypesarticle.html">
+            <p class="hero-eyebrow mb-1">Font Types Article</p>
+            <p class="mb-3 text-muted" style="font-size:0.9rem;">An exploration of serif, sans-serif, blackletter, and open source typefaces.</p>
+            <span class="card-link">Read Article</span>
+          </a>
+        </div>
+        <div class="col-md-6">
+          <a class="card-callout" href="typographyarticle.html">
+            <p class="hero-eyebrow mb-1">Typography Article</p>
+            <p class="mb-3 text-muted" style="font-size:0.9rem;">Comparing two websites with very different approaches to typography.</p>
+            <span class="card-link">Read Article</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <dt>Sans-serif</dt>
-        <dd>Fonts without decorative strokes.</dd>
+  <!-- FOOTER -->
+  <footer>
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+      <span>&copy; 2026 Shannon Ziemba. All rights reserved.</span>
+      <a href="mailto:sziemba@gmail.com">sziemba@gmail.com</a>
+    </div>
+  </footer>
 
-        <dt>Kerning</dt>
-        <dd>The spacing between individual letters.</dd>
-
-        <dt>Leading</dt>
-        <dd>The vertical space between lines of text.</dd>
-
-        <dt>Tracking</dt>
-        <dd>The overall spacing between characters.</dd>
-
-        <dt>Hierarchy</dt>
-        <dd>The arrangement of text to show importance.</dd>
-
-        <dt>Alignment</dt>
-        <dd>The positioning of text on a page.</dd>
-
-        <dt>Baseline</dt>
-        <dd>The invisible line that text sits on.</dd>
-
-        <dt>X-height</dt>
-        <dd>The height of lowercase letters.</dd>
-
-        <dt>Ascender</dt>
-        <dd>Part of a letter that rises above the x-height.</dd>
-
-        <dt>Descender</dt>
-        <dd>Part of a letter that falls below the baseline.</dd>
-    </dl>
-</section>
-
-
-    <section>
-     <h2>Font Types Article</h2>
-        <p>
-            <a href="fonttypesarticle.html">Click here for a an Article on Font Types</a>
-        </p>
-          
-    <h2>Typography Article</h2>
-        <p>
-            <a href="typographyarticle copy.html">Click here for a an Article on Typography</a>
-        </p>
-    </section>
-</main>
-
-<footer>
-    <p>&copy; Shannon Ziemba. All rights reserved.</p>
-</footer>
-
-<script src="../scripts/theme.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

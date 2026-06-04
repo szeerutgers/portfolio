@@ -1,147 +1,264 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="../styles/sitewide.css">
-  <title>Photoshop Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Color Theory Article — Zee's Portfolio</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap');
+
+:root {
+  --accent: #089b74;
+  --accent-hover: #e3731d;
+  --bg: #F5F3EE;
+  --surface: #FFFFFF;
+  --text-primary: #111111;
+  --text-muted: #666666;
+  --border: #DEDBD5;
+  --nav-height: 64px;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.navbar {
+  background-color: var(--surface) !important;
+  border-bottom: 1px solid var(--border);
+  height: var(--nav-height);
+  padding: 0 1.5rem;
+}
+
+.navbar-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary) !important;
+  letter-spacing: -0.02em;
+}
+
+.navbar-brand span { color: var(--accent); }
+
+.nav-link {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary) !important;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.5rem 0.85rem !important;
+  transition: color 0.2s;
+}
+
+.nav-link:hover, .nav-link.active { color: var(--accent) !important; }
+
+.dropdown-menu {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  padding: 0.5rem 0;
+  background: var(--surface);
+}
+
+.dropdown-item {
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  padding: 0.5rem 1.25rem;
+  transition: background 0.15s;
+}
+
+.dropdown-item:hover { background-color: var(--bg); color: var(--accent); }
+.navbar-toggler { border: none; padding: 0; }
+.navbar-toggler:focus { box-shadow: none; }
+
+.hero-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.page-intro {
+  padding: 4rem 0 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.section {
+  padding: 4rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.media-frame {
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin-top: 1.5rem;
+}
+
+.media-frame img {
+  width: 100%;
+  display: block;
+}
+
+footer {
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--border);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+footer a { color: var(--accent); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+  </style>
 </head>
 <body>
 
-<header>
-  <img src="../images/selfie.jpg" alt="My photo">
-  <h1>Zee's Portfolio</h1>
-  <nav>
-    <ul>
-      <li><a href="../index.html">Home</a></li>
-      <li><a href="../resume.html">Resume</a></li>
-    
-    <li class="has-dropdown">
-        <button class="nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
-          Showcase <span class="nav-arrow">&#9660;</span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a href="animate.html">Adobe Animate</a></li>
-          <li><a href="photoshop.html">Photoshop</a></li>
-        </ul>
-      </li>
-
-      <li class="has-dropdown">
-        <button class="nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
-          Theory <span class="nav-arrow">&#9660;</span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a href="colortheoryoverview.html">Color Theory Overview</a></li>
-          <li><a href="colorthemes.html">Color Themes</a></li>
-          <li><a href="typographyoverview.html">Typography Overview</a></li>
-          <li><a href="typographyarticle.html">Typography Article</a></li>
-        </ul>
-      </li>
-
-      <li class="has-dropdown" id="theme-nav-item">
-        <button class="nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
-          Theme <span class="nav-arrow">&#9660;</span>
-        </button>
-        <ul class="dropdown-menu theme-menu">
-          <li class="theme-group-label">Mode</li>
-          <li class="theme-options-row">
-            <button id="btn-light" class="theme-opt active" onclick="setMode('light')">Light</button>
-            <button id="btn-dark"  class="theme-opt"        onclick="setMode('dark')">Dark</button>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">Zee<span>.</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+          <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="../resume.html">Resume</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Showcase</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="animate.html">Adobe Animate</a></li>
+              <li><a class="dropdown-item" href="photoshop.html">Photoshop</a></li>
+            </ul>
           </li>
-          <li class="theme-divider"></li>
-          <li class="theme-group-label">Font Size</li>
-          <li class="theme-options-row">
-            <button id="btn-small"  class="theme-opt"        onclick="setFont('small')">Small</button>
-            <button id="btn-medium" class="theme-opt active" onclick="setFont('medium')">Medium</button>
-            <button id="btn-large"  class="theme-opt"        onclick="setFont('large')">Large</button>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" data-bs-toggle="dropdown">Theory</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="colortheoryoverview.html">Color Theory Overview</a></li>
+              <li><a class="dropdown-item" href="colorthemes.html">Color Themes</a></li>
+              <li><a class="dropdown-item" href="typographyoverview.html">Typography Overview</a></li>
+              <li><a class="dropdown-item" href="typographyarticle.html">Typography Article</a></li>
+            </ul>
           </li>
         </ul>
-      </li>
-
-    </ul>
+      </div>
+    </div>
   </nav>
-</header>
 
-<main>
-  <section><h1>The Role of Color in Web Design</h1>
+  <!-- PAGE HEADER -->
+  <header class="page-intro">
+    <div class="container">
+      <p class="hero-eyebrow">Theory / Color</p>
+      <h1 class="mb-3">The Role of Color in Web Design</h1>
+      <p class="text-muted" style="max-width: 560px;">Comparing two websites to explore how color choices shape user experience and perception.</p>
+    </div>
+  </header>
 
-  <div class="section">
-    <p>
-      Color plays a powerful role in how users experience a website. It can guide attention, 
-      create emotion, and either clarify or confuse the message. By comparing two different 
-      websites, it became clear how color choices can dramatically impact usability and perception.
-    </p>
-    </section>
+  <!-- INTRO -->
+  <section class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-7">
+          <p>Color plays a powerful role in how users experience a website. It can guide attention, create emotion, and either clarify or confuse the message. By comparing two different websites, it became clear how color choices can dramatically impact usability and perception.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <section><h2>Yale School of Art (Disliked)</h2>
-    <p>
-      <a href="https://www.art.yale.edu" target="_blank">Click Here to Visit Yale School of Art Website</a>
-    </p>
+  <!-- YALE -->
+  <section class="section">
+    <div class="container">
+      <p class="section-label">Case Study 01 — Disliked</p>
+      <div class="row g-5 align-items-start">
+        <div class="col-lg-6">
+          <h2 class="mb-3">Yale School of Art</h2>
+          <p><a href="https://www.art.yale.edu" target="_blank" style="color:var(--accent);">Visit Yale School of Art →</a></p>
+          <p>The Yale School of Art website is widely known for its unconventional and chaotic design. One of the most striking elements is its use of color. The site often features bright, clashing backgrounds, layered images, and inconsistent color palettes across pages.</p>
+          <p>From a user experience perspective, this creates visual overload. Too many colors compete for attention, making it difficult to focus on important information. The lack of hierarchy and inconsistent color use also reduces readability.</p>
+          <p>While the site may be intended as an artistic experiment, it can feel overwhelming and disorienting for users trying to navigate it.</p>
+        </div>
+        <div class="col-lg-6">
+          <div class="media-frame">
+            <img src="../YaleSOAScreenshot.png" alt="Yale School of Art website screenshot" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <p>
-      The Yale School of Art website is widely known for its unconventional and chaotic design. 
-      One of the most striking elements is its use of color. The site often features bright, 
-      clashing backgrounds, layered images, and inconsistent color palettes across pages.
-    </p>
+  <!-- REWILD -->
+  <section class="section">
+    <div class="container">
+      <p class="section-label">Case Study 02 — Liked</p>
+      <div class="row g-5 align-items-start">
+        <div class="col-lg-6">
+          <h2 class="mb-3">Rewild Yourself</h2>
+          <p><a href="https://rewildyourself.com" target="_blank" style="color:var(--accent);">Visit Rewild Yourself →</a></p>
+          <p>The Rewild Yourself website uses color in a calm and intentional way that supports its message. The site focuses on connecting people with nature, and its color palette reflects that purpose.</p>
+          <p>Earth-toned colors like greens, whites, and soft neutrals create a sense of calm. The consistent use of color across the site makes it easy to navigate and understand.</p>
+          <p>Unlike the Yale site, the color on Rewild Yourself helps guide the user experience rather than distract from it. The color reinforces the message and creates a welcoming, grounded feeling.</p>
+        </div>
+        <div class="col-lg-6">
+          <div class="media-frame">
+            <img src="../RewildYourselfScreenshot.png" alt="Rewild Yourself website screenshot" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <p>
-      From a user experience perspective, this creates visual overload. Too many colors compete 
-      for attention, making it difficult to focus on important information. The lack of hierarchy 
-      and inconsistent color use also reduces readability.
-    </p>
+  <!-- CONCLUSION -->
+  <section class="section">
+    <div class="container">
+      <p class="section-label">Conclusion</p>
+      <div class="row">
+        <div class="col-lg-7">
+          <p>Color is not just for decoration, but is a functional design tool. When used thoughtfully, it enhances clarity, emotion, and usability. When overused or applied inconsistently, it can create confusion and frustration.</p>
+          <p>These two examples show that it's not about how many colors are used, but how effectively they support the user's experience.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <p>
-      While the site may be intended as an artistic experiment, it can feel overwhelming and 
-      disorienting for users trying to navigate it.
-    </p>
+  <!-- FOOTER -->
+  <footer>
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+      <span>&copy; 2026 Shannon Ziemba. All rights reserved.</span>
+      <a href="mailto:sziemba@gmail.com">sziemba@gmail.com</a>
+    </div>
+  </footer>
 
-      <img src="../YaleSOAScreenshot.png">
-    </section>
-    
-    <section>
-    <h2>Rewild Yourself (Liked)</h2>
-    <p>
-      <a href="https://rewildyourself.com" target="_blank">Click Here to Visit Rewild Yourself Website</a>
-    </p>
-
-    <p>
-      The Rewild Yourself website uses color in a calm and intentional way that 
-      supports its message. The site focuses on connecting people with nature, and its color 
-      palette reflects that purpose.
-    </p>
-
-    <p>
-      Earth-toned colors like greens, whites, and soft neutrals create a sense of calm. The 
-      consistent use of color across the site makes it easy to navigate and understand.
-    </p>
-
-    <p>
-      Unlike the Yale site, the color on Rewild Yourself helps guide the user experience rather than distract 
-      from it. The color reinforces the message and creates a welcoming, grounded feeling.
-    </p>
-
-      <img src="../RewildYourselfScreenshot.png">
-    </section>
-
-    <section><h2>Conclusion</h2>
-    <p>
-      Color is not just  for decoration, but is a functional design tool. When used thoughtfully, it 
-      enhances clarity, emotion, and usability. When overused or applied inconsistently, it can 
-      create confusion and frustration.
-    </p>
-
-    <p>
-      These two examples show that it's not about how many colors are used, but how effectively 
-      they support the user's experience.
-    </p>
-    </section>
-  </div>
-</main>
-
-<footer>
-    <p>&copy; Shannon Ziemba. All rights reserved.</p>
-</footer>
-
-<script src="../scripts/theme.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
