@@ -1,140 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="../styles/sitewide.css">
-  <title>Photoshop Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Color Theory Article — Zee's Portfolio</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap');
+
+:root {
+  --accent: #089b74;
+  --accent-hover: #e3731d;
+  --bg: #F5F3EE;
+  --surface: #FFFFFF;
+  --text-primary: #111111;
+  --text-muted: #666666;
+  --border: #DEDBD5;
+  --nav-height: 64px;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.navbar {
+  background-color: var(--surface) !important;
+  border-bottom: 1px solid var(--border);
+  height: var(--nav-height);
+  padding: 0 1.5rem;
+}
+
+.navbar-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary) !important;
+  letter-spacing: -0.02em;
+}
+
+.navbar-brand span { color: var(--accent); }
+
+.nav-link {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary) !important;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.5rem 0.85rem !important;
+  transition: color 0.2s;
+}
+
+.nav-link:hover, .nav-link.active { color: var(--accent) !important; }
+
+.dropdown-menu {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  padding: 0.5rem 0;
+  background: var(--surface);
+}
+
+.dropdown-item {
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  padding: 0.5rem 1.25rem;
+  transition: background 0.15s;
+}
+
+.dropdown-item:hover { background-color: var(--bg); color: var(--accent); }
+.navbar-toggler { border: none; padding: 0; }
+.navbar-toggler:focus { box-shadow: none; }
+
+.hero-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.page-intro {
+  padding: 4rem 0 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.section {
+  padding: 4rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.media-frame {
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  margin-top: 1.5rem;
+}
+
+.media-frame img {
+  width: 100%;
+  display: block;
+}
+
+footer {
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--border);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+footer a { color: var(--accent); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+  </style>
 </head>
 <body>
 
-<header>
-  <img src="../images/selfie.jpg" alt="My photo">
-  <h1>Zee's Portfolio</h1>
-  <nav>
-    <ul>
-      <li><a href="../index.html">Home</a></li>
-      <li><a href="../resume.html">Resume</a></li>
-    
-    <li class="has-dropdown">
-        <button class="nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
-          Showcase <span class="nav-arrow">&#9660;</span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a href="animate.html">Adobe Animate</a></li>
-          <li><a href="photoshop.html">Photoshop</a></li>
-        </ul>
-      </li>
-
-      <li class="has-dropdown">
-        <button class="nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
-          Theory <span class="nav-arrow">&#9660;</span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a href="colortheoryoverview.html">Color Theory Overview</a></li>
-          <li><a href="colorthemes.html">Color Themes</a></li>
-          <li><a href="typographyoverview.html">Typography Overview</a></li>
-          <li><a href="typographyarticle.html">Typography Article</a></li>
-        </ul>
-      </li>
-
-      <li class="has-dropdown" id="theme-nav-item">
-        <button class="nav-dropdown-btn" aria-haspopup="true" aria-expanded="false">
-          Theme <span class="nav-arrow">&#9660;</span>
-        </button>
-        <ul class="dropdown-menu theme-menu">
-          <li class="theme-group-label">Mode</li>
-          <li class="theme-options-row">
-            <button id="btn-light" class="theme-opt active" onclick="setMode('light')">Light</button>
-            <button id="btn-dark"  class="theme-opt"        onclick="setMode('dark')">Dark</button>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html">Zee<span>.</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+          <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="../resume.html">Resume</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Showcase</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="animate.html">Adobe Animate</a></li>
+              <li><a class="dropdown-item" href="photoshop.html">Photoshop</a></li>
+            </ul>
           </li>
-          <li class="theme-divider"></li>
-          <li class="theme-group-label">Font Size</li>
-          <li class="theme-options-row">
-            <button id="btn-small"  class="theme-opt"        onclick="setFont('small')">Small</button>
-            <button id="btn-medium" class="theme-opt active" onclick="setFont('medium')">Medium</button>
-            <button id="btn-large"  class="theme-opt"        onclick="setFont('large')">Large</button>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" data-bs-toggle="dropdown">Theory</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="colortheoryoverview.html">Color Theory Overview</a></li>
+              <li><a class="dropdown-item" href="colorthemes.html">Color Themes</a></li>
+              <li><a class="dropdown-item" href="typographyoverview.html">Typography Overview</a></li>
+              <li><a class="dropdown-item" href="typographyarticle.html">Typography Article</a></li>
+            </ul>
           </li>
         </ul>
-      </li>
-
-    </ul>
+      </div>
+    </div>
   </nav>
-</header>
 
-<main>
-<body>
-
-  <section>
-    <h1>The Role of Typography in Web Design</h1>
-
-  <p>
-    Typography is one of the most important elements in web design. It shapes how users read, feel, and interact with content.
+  <!-- PAGE HEADER -->
+  <header class="page-intro">
+    <div class="container">
+      <p class="hero-eyebrow">Theory / Typography</p>
+      <h1 class="mb-3">The Role of Typography in Web Design</h1>
+      <p class="text-muted" style="max-width: 560px;">Typography is one of the most important elements in web design. It shapes how users read, feel, and interact with content.
     Good typography improves readability, establishes hierarchy, and communicates tone. Poor typography can make a site
-    difficult to engage with.
-  </p>
+    difficult to engage with.</p>
+    </div>
+  </header>
+
+  <!-- PNWX -->
+  <section class="section">
+    <div class="container">
+      <p class="section-label">Case Study 01 — Disliked</p>
+      <div class="row g-5 align-items-start">
+        <div class="col-lg-6">
+          <h2 class="mb-3">PNWX</h2>
+          <p><a href="https://www.pnwx.com/" target="_blank" style="color:var(--accent);">Visit PNWX →</a></p>
+          <p>The typography on PNWX feels overwhelming and inconsistent causing a negative impact on the user experience. There is a lack of clear hierarchy that makes it harder to distinguish between headings and body text.</p>
+          <p>The spacing and font choices also reduce readability. The text feels cramped and there is not enough contrast between elements. Instead of guiding the reader, the typography creates confusion and visual friction.</p>
+          <p>Overall, the typography does not communicate a clear tone or identity.</p>
+        </div>
+        <div class="col-lg-6">
+          <div class="media-frame">
+            <img src="../images/PNWX.png" alt="PNWX website screenshot" />
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section>
-    <p>
-    This article compares two websites with very different approaches to Typography:
-  </p>
-
-  <h2>PNWX (Disliked)</h2>
-
-  <p><a href="https://www.pnwx.com/" target="_blank">Click Here to go to PNWX website.</a></p>
-
-  <p>
-    The typography on PNWX feels overwhelming and inconsistent causing a negative impact on the user experience. There is a lack of
-    clear hierarchy that makes it harder to distinguish between headings and body text.
-  </p>
-
-  <p>
-    The spacing and font choices also reduce readability. The text feels cramped and there is not enough contrast between elements.
-    Instead of guiding the reader, the typography creates confusion and visual friction.
-  </p>
-
-  <p>
-    Overall, the typography does not communicate a clear tone or identity.
-  </p>
-  <img src="../images/PNWX.png">
+  <!-- STORYCORPS -->
+  <section class="section">
+    <div class="container">
+      <p class="section-label">Case Study 02 — Liked</p>
+      <div class="row g-5 align-items-start">
+        <div class="col-lg-6">
+          <h2 class="mb-3">Story Corps</h2>
+          <p><a href="https://storycorps.org/" target="_blank" style="color:var(--accent);">Visit StoryCorps →</a></p>
+          <p>StoryCorps uses typography to effectively enhance readability and emotional connection. The site features clean, simple fonts with a clear hierarchy between headings and body text.</p>
+          <p>The whitespace allows the content to have clarity allowing the user to easily read and navigate. Typography supports the storytelling mission of the site by feeling warm, human, and accessible.</p>
+          <p>Instead of distracting from the content, the typography strengthens the user experience and reinforces the site's purpose.</p>
+        </div>
+        <div class="col-lg-6">
+          <div class="media-frame">
+            <img src="../images/StoryCorps.png" alt="StoryCorps website screenshot" />
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section>
-  <h2>StoryCorps (Liked)</h2>
-
-  <p><a href="https://storycorps.org/" target="_blank">Click Here to go to Story Corps website.</a></p>
-
-  <p>
-    StoryCorps uses typography to effectively enhance readability and emotional connection. The site features clean,
-    simple fonts with a clear hierarchy between headings and body text.
-  </p>
-
-  <p>
-    The whitespace allows the content to have clarity allowing the user to easily read and navigate. Typography supports the storytelling mission
-    of the site by feeling warm, human, and accessible.
-  </p>
-
-  <p>
-    Instead of distracting from the content, the typography strengthens the user experience and reinforces the site's purpose.
-  </p>
-
-  <img src="../images/StoryCorps.png">
+  <!-- CONCLUSION -->
+  <section class="section">
+    <div class="container">
+      <p class="section-label">Conclusion</p>
+      <div class="row">
+        <div class="col-lg-7">
+          <p>Each font type serves a unique purpose. Serif fonts bring tradition, sans serif fonts offer clarity, blackletter styles provide historical flair, and open source fonts ensure accessibility and flexibility.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <section>
-  <h2>Conclusion</h2>
-  <p>Each font type serves a unique purpose. Serif fonts bring tradition, sans serif fonts offer clarity, blackletter styles provide historical flair, and open source fonts ensure accessibility and flexibility.</p>
-  </section>
-  </div>
-</body>
-</html>
-</main>
+  <!-- FOOTER -->
+  <footer>
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+      <span>&copy; 2026 Shannon Ziemba. All rights reserved.</span>
+      <a href="mailto:sziemba@gmail.com">sziemba@gmail.com</a>
+    </div>
+  </footer>
 
-<footer>
-    <p>&copy; Shannon Ziemba. All rights reserved.</p>
-</footer>
-
-<script src="../scripts/theme.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
