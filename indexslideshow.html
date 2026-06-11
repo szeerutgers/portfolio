@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Work With Zee</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ── Reset & Variables ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sand:    #f2ede6;
+      --linen:   #e8e0d4;
+      --clay:    #c4a882;
+      --rust:    #b85c38;
+      --teal:    #4a7c7e;
+      --ink:     #1e1e1e;
+      --fog:     #7a7268;
+      --white:   #faf8f5;
+
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-ui:      'SUSE', sans-serif;
+      --font-mono:    'DM Mono', monospace;
+
+      --slide-count: 6;
+      --dur: 0.7s;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      background: var(--ink);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Slideshow Shell ── */
+    .deck {
+      position: relative;
+      width: 100vw;
+      height: 100dvh;
+      overflow: hidden;
+    }
+
+    /* ── Individual Slides ── */
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: clamp(2rem, 6vw, 6rem);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--dur) ease, transform var(--dur) cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateX(60px);
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateX(0);
+    }
+
+    .slide.exit {
+      opacity: 0;
+      transform: translateX(-60px);
+      transition: opacity var(--dur) ease, transform var(--dur) cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ── Slide Themes ── */
+    .slide-1 { background: var(--sand); }
+    .slide-2 { background: var(--ink); color: var(--sand); }
+    .slide-3 { background: var(--teal); color: var(--white); }
+    .slide-4 { background: var(--linen); }
+    .slide-5 { background: var(--rust); color: var(--white); }
+    .slide-6 { background: var(--sand); }
+
+    /* ── Layout Helpers ── */
+    .slide-inner {
+      width: 100%;
+      max-width: 900px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 5vw, 5rem);
+      align-items: center;
+    }
+
+    .three-col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(1rem, 3vw, 2.5rem);
+    }
+
+    /* ── Typography ── */
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: clamp(0.65rem, 1.2vw, 0.8rem);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.55;
+      margin-bottom: 1rem;
+    }
+
+    .headline {
+      font-family: var(--font-display);
+      font-weight: 300;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    .headline em {
+      font-style: italic;
+      font-weight: 300;
+    }
+
+    .headline.xl { font-size: clamp(3.2rem, 9vw, 7.5rem); }
+    .headline.lg { font-size: clamp(2.4rem, 6vw, 5rem); }
+    .headline.md { font-size: clamp(1.8rem, 4vw, 3.2rem); }
+
+    .body-text {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 1.8vw, 1.3rem);
+      font-weight: 300;
+      line-height: 1.7;
+      opacity: 0.85;
+    }
+
+    .ui-text {
+      font-family: var(--font-ui);
+      font-size: clamp(0.8rem, 1.4vw, 0.95rem);
+      font-weight: 400;
+      line-height: 1.65;
+    }
+
+    /* ── Decorative Elements ── */
+    .rule {
+      width: 3rem;
+      height: 2px;
+      background: currentColor;
+      opacity: 0.3;
+      margin-bottom: 1.5rem;
+    }
+
+    .big-number {
+      font-family: var(--font-display);
+      font-size: clamp(5rem, 15vw, 12rem);
+      font-weight: 300;
+      line-height: 1;
+      opacity: 0.08;
+      position: absolute;
+      right: -1rem;
+      top: -2rem;
+      pointer-events: none;
+      letter-spacing: -0.04em;
+    }
+
+    .tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid currentColor;
+      border-radius: 100px;
+      opacity: 0.6;
+      margin: 0.25rem 0.25rem 0.25rem 0;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 0.5rem;
+      padding: clamp(1.2rem, 3vw, 2rem);
+    }
+
+    .card-light {
+      background: rgba(255,255,255,0.55);
+      border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 0.5rem;
+      padding: clamp(1.2rem, 3vw, 2rem);
+    }
+
+    .card-title {
+      font-family: var(--font-ui);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    /* ── Background Accents ── */
+    .bg-circle {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .slide-1 .bg-circle {
+      width: 40vmax;
+      height: 40vmax;
+      background: radial-gradient(circle, rgba(196,168,130,0.25) 0%, transparent 70%);
+      bottom: -10vmax;
+      right: -10vmax;
+    }
+
+    .slide-2 .bg-circle {
+      width: 35vmax;
+      height: 35vmax;
+      background: radial-gradient(circle, rgba(74,124,126,0.2) 0%, transparent 70%);
+      top: -8vmax;
+      left: -8vmax;
+    }
+
+    .slide-3 .bg-circle {
+      width: 50vmax;
+      height: 50vmax;
+      background: radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 70%);
+      bottom: -15vmax;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .slide-5 .bg-circle {
+      width: 45vmax;
+      height: 45vmax;
+      background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+      top: -10vmax;
+      right: -10vmax;
+    }
+
+    /* ── Slide 1 Specific ── */
+    .slide-1 .slide-inner { text-align: left; }
+
+    .initials-stamp {
+      font-family: var(--font-display);
+      font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: 3rem;
+      font-style: italic;
+    }
+
+    /* ── Slide 2 Specific ── */
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .skill-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .skill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--clay);
+      flex-shrink: 0;
+      margin-top: 0.5rem;
+    }
+
+    /* ── Slide 3 Specific ── */
+    .process-step {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .step-num {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      opacity: 0.5;
+      margin-bottom: 0.5rem;
+    }
+
+    .step-name {
+      font-family: var(--font-ui);
+      font-size: clamp(0.85rem, 1.5vw, 1rem);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ── Slide 6 CTA ── */
+    .cta-email {
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem, 2.5vw, 1.8rem);
+      font-style: italic;
+      color: var(--rust);
+      text-decoration: none;
+      border-bottom: 1px solid var(--rust);
+      padding-bottom: 2px;
+      transition: opacity 0.2s;
+    }
+    .cta-email:hover { opacity: 0.65; }
+
+    .portfolio-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      text-decoration: none;
+      margin-top: 1.5rem;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+    .portfolio-link:hover { opacity: 1; }
+    .portfolio-link::after { content: '→'; }
+
+    /* ── Navigation ── */
+    nav {
+      position: fixed;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      z-index: 100;
+    }
+
+    .nav-dots {
+      display: flex;
+      gap: 0.55rem;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--fog);
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      border: none;
+      padding: 0;
+    }
+
+    .dot.active {
+      background: var(--rust);
+      transform: scale(1.35);
+    }
+
+    .nav-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--fog);
+      font-size: 1.1rem;
+      padding: 0.4rem 0.6rem;
+      transition: color 0.2s;
+      font-family: var(--font-mono);
+      line-height: 1;
+    }
+
+    .nav-btn:hover { color: var(--ink); }
+
+    /* ── Slide Counter ── */
+    .counter {
+      position: fixed;
+      bottom: 2.5rem;
+      right: 2.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: var(--fog);
+      z-index: 100;
+    }
+
+    /* ── Swipe  ── */
+    .swipe-hint {
+      position: fixed;
+      bottom: 5.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--fog);
+      opacity: 0.5;
+      z-index: 100;
+    }
+
+    /* ── Responsive ─── */
+    @media (max-width: 700px) {
+      .two-col  { grid-template-columns: 1fr; gap: 2rem; }
+      .three-col { grid-template-columns: 1fr; }
+      .skill-grid { grid-template-columns: 1fr; }
+      .big-number { display: none; }
+      .swipe-hint { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      nav { bottom: 1.5rem; gap: 1rem; }
+      .counter { bottom: 1.5rem; right: 1.5rem; }
+    }
+
+    /* ── Slide-in animation on active ─── */
+    .slide.active .slide-inner > * {
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .slide.active .slide-inner > *:nth-child(1) { animation-delay: 0.05s; }
+    .slide.active .slide-inner > *:nth-child(2) { animation-delay: 0.15s; }
+    .slide.active .slide-inner > *:nth-child(3) { animation-delay: 0.25s; }
+    .slide.active .slide-inner > *:nth-child(4) { animation-delay: 0.35s; }
+    .slide.active .slide-inner > *:nth-child(5) { animation-delay: 0.45s; }
+    .slide.active .slide-inner > *:nth-child(6) { animation-delay: 0.55s; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+
+  <!-- ── Slide 1: Title / Hero ─── -->
+  <section class="slide slide-1 active" aria-label="Slide 1 of 6: Introduction">
+    <div class="bg-circle"></div>
+    <div class="slide-inner">
+      <p class="initials-stamp">Shannon Ziemba </p>
+      <p class="eyebrow">Marketing, Web Design &amp; Digital Strategy</p>
+      <h1 class="headline xl">
+        Your vision,<br>
+        <em>brought to life.</em>
+      </h1>
+      <p class="body-text" style="max-width: 520px;">
+        I create websites that don't just look good...they work hard for your business &amp;
+        feel true to your brand from the first click.
+      </p>
+      <div style="margin-top: 2.5rem;">
+        <span class="tag">Web Design</span>
+        <span class="tag">Brand Identity</span>
+        <span class="tag">Marketing Strategy</span>
+        <span class="tag">UX &amp; Usability</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Slide 2: Skills ── -->
+  <section class="slide slide-2" aria-label="Slide 2 of 6: Skills">
+    <div class="bg-circle"></div>
+    <div class="slide-inner">
+      <div class="two-col">
+        <div>
+          <p class="eyebrow" style="color:var(--clay);">What I bring to the table</p>
+          <h2 class="headline lg">
+            Full-stack<br>
+            <em>creative skills</em>
+          </h2>
+          <p class="body-text" style="color:var(--linen);">
+            15+ years spanning brand marketing, design, and digital. I understand
+            your business goals, not just your visual ones.
+          </p>
+        </div>
+        <div>
+          <div class="skill-grid">
+            <div class="skill-item">
+              <span class="skill-dot"></span>
+              <div class="ui-text" style="color:var(--sand);">
+                <strong>HTML5 &amp; CSS3</strong><br>Semantic, valid, accessible markup and modern layouts
+              </div>
+            </div>
+            <div class="skill-item">
+              <span class="skill-dot"></span>
+              <div class="ui-text" style="color:var(--sand);">
+                <strong>JavaScript</strong><br>Smooth interactivity
+              </div>
+            </div>
+            <div class="skill-item">
+              <span class="skill-dot"></span>
+              <div class="ui-text" style="color:var(--sand);">
+                <strong>Responsive Design</strong><br>Looks and works great on every screen size
+              </div>
+            </div>
+            <div class="skill-item">
+              <span class="skill-dot"></span>
+              <div class="ui-text" style="color:var(--sand);">
+                <strong>Brand Alignment</strong><br>Design decisions rooted in your identity
+              </div>
+            </div>
+            <div class="skill-item">
+              <span class="skill-dot"></span>
+              <div class="ui-text" style="color:var(--sand);">
+                <strong>CMS &amp; Platforms</strong><br>WordPress, GitHub Pages &amp; more
+              </div>
+            </div>
+            <div class="skill-item">
+              <span class="skill-dot"></span>
+              <div class="ui-text" style="color:var(--sand);">
+                <strong>SEO Foundations</strong><br>Built-in best practices from day one
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Slide 3: Process ── -->
+  <section class="slide slide-3" aria-label="Slide 3 of 6: My Process">
+    <div class="bg-circle"></div>
+    <div class="slide-inner">
+      <p class="eyebrow">How we work together</p>
+      <h2 class="headline lg" style="margin-bottom: 2.5rem;">
+        A process as<br><em>clear as your goals</em>
+      </h2>
+      <div class="three-col">
+        <div class="card process-step">
+          <p class="step-num">01 &mdash; Discover</p>
+          <p class="step-name">Deep Listening</p>
+          <p class="ui-text" style="opacity:0.85;">
+            We start with a real conversation about your business, audience, and what success looks like for you.
+          </p>
+        </div>
+        <div class="card process-step">
+          <p class="step-num">02 &mdash; Design</p>
+          <p class="step-name">Thoughtful Creation</p>
+          <p class="ui-text" style="opacity:0.85;">
+            I develop a design direction and share it with you before writing a single line of code. You approve &amp; I refine.
+          </p>
+        </div>
+        <div class="card process-step">
+          <p class="step-num">03 &mdash; Deliver</p>
+          <p class="step-name">Launch &amp; Beyond</p>
+          <p class="ui-text" style="opacity:0.85;">
+            Your site launches polished and tested. I provide a walkthrough so you feel fully in control of your own space.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Slide 4: Experience / What it's like ── -->
+  <section class="slide slide-4" aria-label="Slide 4 of 6: The Experience">
+    <div class="slide-inner" style="position:relative;">
+      <p class="eyebrow">What working with me feels like</p>
+      <h2 class="headline lg" style="margin-bottom:2rem;">
+        Calm, clear,<br><em>collaborative.</em>
+      </h2>
+      <div class="two-col">
+        <div class="card-light">
+          <p class="card-title" style="color:var(--teal);">You'll never wonder what's happening</p>
+          <p class="ui-text">
+            I check in at every stage and explain decisions in plain language. Deadlines are real commitments.
+            You'll have a direct line to me.
+          </p>
+        </div>
+        <div class="card-light">
+          <p class="card-title" style="color:var(--rust);">Your feedback actually changes things</p>
+          <p class="ui-text">
+            Revisions are part of the process. I listen closely and iterate
+            until the result feels<em>genuine.</em>
+          </p>
+        </div>
+      </div>
+      <p class="body-text" style="margin-top:2rem; max-width:600px;">
+        I bring the same warmth and care to client relationships that I bring to everything else I do.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Slide 5: Why Zee ── -->
+  <section class="slide slide-5" aria-label="Slide 5 of 6: Why Choose Zee">
+    <div class="bg-circle"></div>
+    <div class="slide-inner">
+      <p class="eyebrow" style="opacity:0.65;">Why clients choose me</p>
+      <h2 class="headline lg" style="margin-bottom:2rem;">
+        One person.<br><em>Full picture.</em>
+      </h2>
+      <div class="two-col">
+        <div>
+          <p class="body-text">
+            When you hire a large agency, your project passes through many hands.
+            When you hire me, you get a single trusted creative who holds the full context
+            of your brand from start to finish, and someone who actually cares about the outcome.
+          </p>
+          <p class="body-text" style="margin-top:1.25rem;">
+            My background spans marketing strategy, graphic design, and human-centered
+            communication. That means your website is built with <em>business and
+            design sense</em> working in unison.
+          </p>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:1rem;">
+          <div class="card" style="border-color:rgba(255,255,255,0.25);">
+            <p class="card-title">Curated expertise for businesses that value collaboration</p>
+            <p class="ui-text">A dedicated marketing partner invested in your success.</p>
+          </div>
+          <div class="card" style="border-color:rgba(255,255,255,0.25);">
+            <p class="card-title">Strategy-first thinking</p>
+            <p class="ui-text">Every design choice serves your business goals amp; not just aesthetics.</p>
+          </div>
+          <div class="card" style="border-color:rgba(255,255,255,0.25);">
+            <p class="card-title">Flexible &amp; responsive</p>
+            <p class="ui-text">Freelance speed with professional-grade deliverables.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Slide 6: CTA ── -->
+  <section class="slide slide-6" aria-label="Slide 6 of 6: Let's Work Together">
+    <div class="slide-inner" style="text-align:center; position:relative;">
+      <p class="eyebrow" style="text-align:center;">Let's build something together</p>
+      <div class="rule" style="margin: 0 auto 1.5rem;"></div>
+      <h2 class="headline xl" style="text-align:center; margin-bottom:1rem;">
+        Ready when<br><em>you are.</em>
+      </h2>
+      <p class="body-text" style="text-align:center; max-width:480px; margin:0 auto 2.5rem;">
+        I'd love to hear about your project. Reach out and let's start with a conversation.
+      </p>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:1.25rem;">
+        <a href="mailto:sziemba@gmail.com" class="cta-email">sziemba@gmail.com</a>
+        <a href="https://szeerutgers.github.io/portfolio/" target="_blank" rel="noopener noreferrer" class="portfolio-link">
+          View my portfolio
+        </a>
+      </div>
+    </div>
+  </section>
+
+<!-- Navigation -->
+<nav aria-label="Slide navigation">
+  <button class="nav-btn" id="prevBtn" aria-label="Previous slide" title="Previous">&#8592;</button>
+  <div class="nav-dots" role="tablist" aria-label="Slide indicators">
+    <button class="dot active" role="tab" id="tab-0" aria-selected="true"  aria-controls="panel-0" aria-label="Slide 1" data-index="0"></button>
+    <button class="dot"        role="tab" id="tab-1" aria-selected="false" aria-controls="panel-1" aria-label="Slide 2" data-index="1"></button>
+    <button class="dot"        role="tab" id="tab-2" aria-selected="false" aria-controls="panel-2" aria-label="Slide 3" data-index="2"></button>
+    <button class="dot"        role="tab" id="tab-3" aria-selected="false" aria-controls="panel-3" aria-label="Slide 4" data-index="3"></button>
+    <button class="dot"        role="tab" id="tab-4" aria-selected="false" aria-controls="panel-4" aria-label="Slide 5" data-index="4"></button>
+    <button class="dot"        role="tab" id="tab-5" aria-selected="false" aria-controls="panel-5" aria-label="Slide 6" data-index="5"></button>
+  </div>
+    <button class="nav-btn" id="nextBtn" aria-label="Next slide" title="Next">&#8594;</button>
+</nav>
+
+<!-- Slide panels -->
+<div id="panel-0" role="tabpanel" aria-labelledby="tab-0">
+  <!-- Slide 1 content -->
+</div>
+<div id="panel-1" role="tabpanel" aria-labelledby="tab-1" hidden>
+  <!-- Slide 2 content -->
+</div>
+<div id="panel-2" role="tabpanel" aria-labelledby="tab-2" hidden>
+  <!-- Slide 3 content -->
+</div>
+<div id="panel-3" role="tabpanel" aria-labelledby="tab-3" hidden>
+  <!-- Slide 4 content -->
+</div>
+<div id="panel-4" role="tabpanel" aria-labelledby="tab-4" hidden>
+  <!-- Slide 5 content -->
+</div>
+<div id="panel-5" role="tabpanel" aria-labelledby="tab-5" hidden>
+  <!-- Slide 6 content -->
+</div>
+  <button class="nav-btn" id="nextBtn" aria-label="Next slide" title="Next">&#8594;</button>
+
+
+<div class="counter" aria-live="polite" aria-atomic="true">
+  <span id="currentSlide">01</span> / 06
+</div>
+
+<p class="swipe-hint" aria-hidden="true">← swipe or use arrow keys →</p>
+
+<script>
+  (function () {
+    const slides  = Array.from(document.querySelectorAll('.slide'));
+    const dots    = Array.from(document.querySelectorAll('.dot'));
+    const counter = document.getElementById('currentSlide');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    let current   = 0;
+    let animating = false;
+
+    function goTo(next) {
+      if (animating || next === current) return;
+      animating = true;
+
+      const prev = current;
+      current = (next + slides.length) % slides.length;
+
+      slides[prev].classList.add('exit');
+      slides[prev].classList.remove('active');
+      slides[current].classList.add('active');
+
+      dots.forEach((d, i) => {
+        d.classList.toggle('active', i === current);
+        d.setAttribute('aria-selected', i === current ? 'true' : 'false');
+      });
+
+      counter.textContent = String(current + 1).padStart(2, '0');
+
+      setTimeout(() => {
+        slides[prev].classList.remove('exit');
+        animating = false;
+      }, 750);
+    }
+
+    nextBtn.addEventListener('click', () => goTo(current + 1));
+    prevBtn.addEventListener('click', () => goTo(current - 1));
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => goTo(i));
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown')  goTo(current + 1);
+      if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')    goTo(current - 1);
+    });
+
+    // Touch / swipe support
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    document.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      const dy = e.changedTouches[0].clientY - touchStartY;
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+        goTo(dx < 0 ? current + 1 : current - 1);
+      }
+    }, { passive: true });
+  })();
+</script>
+
+</body>
+</html>
